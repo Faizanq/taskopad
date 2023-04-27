@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from "react"
 import { v4 as uuidv4 } from "uuid"
+import { Formik, Form, Field } from 'formik';
 
 import { Row } from "./Row"
 import { AddTodo } from "./AddTodo"
@@ -39,23 +40,27 @@ export const Todos = () => {
     setDescription("")
   }
 
-  const handleChange = (e: ChangeEvent) => {
-    const { value } = e.target as HTMLInputElement
-    if(e.target.name === 'title') setTitle(value)
-    if(e.target.name === 'description') setDescription(value)
-  }
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    if (name === "title") {
+      setTitle(value);
+    } else if (name === "description") {
+      setDescription(value);
+    }
+  };
 
-  const handleSubmitTodo = (e: FormEvent) => {
-    e.preventDefault()
-
+  const handleSubmitTodo = (values, { resetForm }) => {
+    const { title, description } = values;
     const todo = {
       id: uuidv4(),
       title: title,
       description: description,
       isCompleted: false,
-    }
-    title && handleAddTodo(todo)
-  }
+    };
+    handleAddTodo(todo);
+    resetForm();
+  };
+
 
   return (
     <section className="w-10/12 lg:w-1/2 max-w-2xl flex flex-col items-center">

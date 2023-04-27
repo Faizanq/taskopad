@@ -19,10 +19,10 @@ export const Row = ({
     >
       {title}
     </p>
-    <div className="w-1/6 flex justify-between items-center mr-2">
+    <div className="flex justify-between items-center gap-2">
       <button
         aria-label="Delete a todo"
-        className="h-7 w-7 flex justify-center items-center bg-red-400 hover:bg-red-500 text-white font-bold  rounded"
+        className=" w-7 flex justify-center items-center bg-red-400 hover:bg-red-500 text-white font-bold  rounded"
         onClick={() => handleDeleteTodo(id)}
       >
         X
